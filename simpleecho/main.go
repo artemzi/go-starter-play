@@ -14,7 +14,11 @@ func main() {
 	http.HandleFunc("/", handler) // handler called for each request
 	http.HandleFunc("/count", counter)
 	http.HandleFunc("/lissajous", func(w http.ResponseWriter, r *http.Request) {
-		Lissajous(w)
+		if len(r.URL.Query()["cycles"]) == 0 {
+			Lissajous(w)
+		} else {
+			Lissajous(w, r.URL.Query()["cycles"])
+		}
 	})
 
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
