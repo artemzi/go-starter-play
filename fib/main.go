@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 func main() {
+
 	x := fib(10)
 	fmt.Printf("Fibonacci digit #10 is %d\n", x)
 }
