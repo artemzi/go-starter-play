@@ -8,10 +8,10 @@ import (
 )
 
 const (
-	width, height = 600, 320
+	width, height = 800, 450
 	cells         = 100
 	xyrange       = 30.0 // диапазон осей
-	xyscale       = width / 2 / xyrange
+	xyscale       = width / 12 / xyrange
 	zscale        = height * 0.4
 	angle         = math.Pi / 6
 )
