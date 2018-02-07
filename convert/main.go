@@ -17,6 +17,6 @@ func main() {
 			log.Println("Wrong integer value in input")
 			os.Exit(2)
 		}
-		fmt.Printf("Bin value of input is: %b\n", i)
+		fmt.Printf("Bin value of input is: %08b\n", i)
 	}
 }
