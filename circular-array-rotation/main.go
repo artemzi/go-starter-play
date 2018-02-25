@@ -11,10 +11,8 @@ import (
 )
 
 func swap(s *[]int) {
-	l := len((*s)) - 1                 // get last element index
-	tmp := (*s)[l]                     // save last element index
-	(*s) = (*s)[:l]                    // cut last element
-	(*s) = append([]int{tmp}, (*s)...) // prepend last element
+	l := len((*s)) - 1
+	(*s) = append([]int{(*s)[l]}, (*s)[:l]...)
 }
 
 func main() {
