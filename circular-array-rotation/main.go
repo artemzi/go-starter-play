@@ -4,15 +4,22 @@ package main
 
 import (
 	"bufio"
-	"log"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
 )
 
+func swap(s *[]int) {
+	l := len((*s)) - 1                 // get last element index
+	tmp := (*s)[l]                     // save last element index
+	(*s) = (*s)[:l]                    // cut last element
+	(*s) = append([]int{tmp}, (*s)...) // prepend last element
+}
+
 func main() {
 	cnt := 0
-	n, k, q := 0, 0, 0
+	var n, k, q int
 	var seq []int
 	var m []int
 
@@ -27,20 +34,63 @@ func main() {
 		case 1:
 			tmp := strings.Split(scn.Text(), " ")
 			if len(tmp) != n {
-				panic("wrong sequence length")
+				fmt.Printf("wrong seq length %v, %v", len(tmp), n)
 			}
 			seq = make([]int, 0, n)
+			m = make([]int, 0, n)
 			for _, v := range tmp {
 				val, _ := strconv.Atoi(v)
 				seq = append(seq, val)
 			}
 		default:
 			tmp, _ := strconv.Atoi(scn.Text())
-			m = make([]int, 0, n-1)
 			m = append(m, tmp)
 		}
 
 		cnt++
 	}
-	log.Printf("\nn = %d, k = %d, q = %d\nseq = %d\nm = %d\n", n, k, q, seq, m)
+	if len(m) != q {
+		fmt.Printf("wrong m length %v, %v", len(m), q)
+	}
+	// make rotaions
+	for i := 0; i < k; i++ {
+		swap(&seq)
+	}
+
+	for _, i := range m {
+		fmt.Println(seq[i])
+	}
 }
+
+// =============== this work with full input.
+// package main
+
+// import "fmt"
+
+// func CircularArrayRotation() {
+//     var n, k, q int
+
+//     fmt.Scanf("%d%d%d", &n, &k, &q)
+//     a := make([]int, n)
+//     for i := range a {
+//         fmt.Scanf("%d", &a[i])
+//     }
+
+//     var i int
+//     for t := 0; t < q; t++ {
+
+//         fmt.Scanf("%d", &i)
+//         j := i - k
+//         for j < 0 {
+//             j += n
+//         }
+
+//         fmt.Println(a[j])
+//     }
+
+// }
+
+// func main() {
+//     //Enter your code here. Read input from STDIN. Print output to STDOUT
+//     CircularArrayRotation()
+// }
