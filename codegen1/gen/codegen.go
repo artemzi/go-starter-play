@@ -54,20 +54,21 @@ func main() {
 	for _, f := range node.Decls {
 		g, ok := f.(*ast.GenDecl)
 		if !ok {
-			fmt.Printf("SKIP %#T is not *ast.GenDecl\n", f)
+			fmt.Printf("SKIP %T is not *ast.GenDecl\n", f)
 			continue
 		}
+	//noinspection GoSnakeCaseUsage
 	SPECS_LOOP:
 		for _, spec := range g.Specs {
 			currType, ok := spec.(*ast.TypeSpec)
 			if !ok {
-				fmt.Printf("SKIP %#T is not ast.TypeSpec\n", spec)
+				fmt.Printf("SKIP %T is not ast.TypeSpec\n", spec)
 				continue
 			}
 
 			currStruct, ok := currType.Type.(*ast.StructType)
 			if !ok {
-				fmt.Printf("SKIP %#T is not ast.StructType\n", currStruct)
+				fmt.Printf("SKIP %T is not ast.StructType\n", currStruct)
 				continue
 			}
 

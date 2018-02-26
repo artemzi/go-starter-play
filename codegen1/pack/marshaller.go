@@ -24,3 +24,4 @@ func (in *User) Unpack(data []byte) error {
 	in.Flags = int(FlagsRaw)
 	return nil
 }
+
