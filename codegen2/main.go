@@ -17,3 +17,4 @@ func main() {
 
 // use it with:
 // go build gen/* && ./generator main.go MyInt
+// go run *.go
