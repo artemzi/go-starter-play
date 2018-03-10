@@ -20,7 +20,7 @@ message CustomerRequest {
         string street = 1;
         string city = 2;
         string state = 3;
-        string zip = 3;
+        string zip = 4;
         bool isShippingAddress = 5;
     }
 
@@ -35,3 +35,5 @@ message CustomerResponse {
 message CustomerFilter {
     string keyword = 1;
 }
+
+// usage: protoc -I customer/ customer/customer.proto --go_out=plugins=grpc:customer
