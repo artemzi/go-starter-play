@@ -12,7 +12,7 @@ import (
 
 const port = ":50051"
 
-// server is used to implement customer.CustomerServer.
+// server is used to implement customer.CostomerServer.
 type server struct {
 	savedCustomers []*pb.CustomerRequest
 }
