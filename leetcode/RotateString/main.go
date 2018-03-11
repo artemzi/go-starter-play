@@ -3,10 +3,9 @@
 package rotatestring
 
 func move(s *string) {
-	l := len((*s)) - 1
-	r := []rune((*s))
-	r = append([]rune{r[l]}, r[:l]...)
-	(*s) = string(r)
+	r := []rune((*s))       // convert string into runes array
+	r = append(r[1:], r[0]) // move
+	(*s) = string(r)        // save result
 }
 
 func rotateString(A string, B string) bool {
