@@ -13,14 +13,20 @@ func TestMove(t *testing.T) {
 	s := "abcde"
 	move(&s)
 
-	if s != "eabcd" {
+	if s != "bcdea" {
 		t.Errorf("Swap return bad result: %v", s)
 	}
 
 	s = "abced"
 	move(&s)
 
-	if s != "dabce" {
+	if s != "bceda" {
+		t.Errorf("Swap return bad result: %v", s)
+	}
+
+	move(&s)
+
+	if s != "cedab" {
 		t.Errorf("Swap return bad result: %v", s)
 	}
 }
