@@ -9,6 +9,22 @@ type Data struct {
 	Result bool
 }
 
+func TestMove(t *testing.T) {
+	s := "abcde"
+	move(&s)
+
+	if s != "eabcd" {
+		t.Errorf("Swap return bad result: %v", s)
+	}
+
+	s = "abced"
+	move(&s)
+
+	if s != "dabce" {
+		t.Errorf("Swap return bad result: %v", s)
+	}
+}
+
 func TestRotateString(t *testing.T) {
 	var result bool
 	data := make([]Data, 0, 3)
