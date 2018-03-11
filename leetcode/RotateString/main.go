@@ -9,6 +9,12 @@ func move(s *string) {
 }
 
 func rotateString(A string, B string) bool {
-
+	tmp := A
+	for i := 0; i < len(A); i++ {
+		if tmp == B {
+			return true
+		}
+		move(&tmp)
+	}
 	return false
 }
