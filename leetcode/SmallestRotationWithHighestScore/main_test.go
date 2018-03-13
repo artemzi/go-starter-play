@@ -1,6 +1,24 @@
 package main
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
+
+func TestMove(t *testing.T) {
+	inp := []int{2, 3, 1, 4, 0}
+	move(&inp)
+
+	if !reflect.DeepEqual(inp, []int{3, 1, 4, 0, 2}) {
+		t.Errorf("Fail move case 1 return bad result: %v", inp)
+	}
+
+	move(&inp)
+
+	if !reflect.DeepEqual(inp, []int{1, 4, 0, 2, 3}) {
+		t.Errorf("Fail move case 2 return bad result: %v", inp)
+	}
+}
 
 func TestBestRotation(t *testing.T) {
 	inp := []int{2, 3, 1, 4, 0}

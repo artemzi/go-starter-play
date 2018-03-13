@@ -3,6 +3,10 @@ package main
 
 import "fmt"
 
+func move(A *[]int) {
+	(*A) = append((*A)[1:], (*A)[0])
+}
+
 func bestRotation(A []int) int {
 	return 1
 }
