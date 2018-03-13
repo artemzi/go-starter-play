@@ -44,6 +44,21 @@ func TestBestRotation(t *testing.T) {
 	// 2 <= 3 [one point], 4 <= 4 [one point].
 
 	if res != 3 {
-		t.Errorf("Wrong result; got: %v, expected: 3.\n", res)
+		t.Errorf("Wrong result case 1; got: %v, expected: 3.\n", res)
+	}
+
+	res = bestRotation([]int{0, 3, 1, 3, 1})
+	if res != 0 {
+		t.Errorf("Wrong result case 2; got: %v, expected: 3.\n", res)
+	}
+
+	res = bestRotation([]int{6, 2, 8, 3, 5, 2, 4, 3, 7, 6})
+	if res != 9 {
+		t.Errorf("Wrong result case 3; got: %v, expected: 3.\n", res)
+	}
+
+	res = bestRotation([]int{33, 17, 66, 78, 44, 82, 60, 85, 93, 17, 2, 68, 80, 29, 30, 16, 27, 97, 75, 45, 52, 51, 59, 27, 26, 60, 26, 0, 23, 49, 65, 68, 45, 18, 97, 64, 99, 4, 96, 85, 12, 50, 95, 96, 76, 84, 90, 56, 66, 74, 7, 99, 24, 45, 40, 20, 57, 88, 89, 87, 77, 68, 55, 65, 56, 54, 48, 47, 89, 22, 91, 39, 49, 62, 89, 93, 3, 44, 9, 9, 89, 31, 41, 12, 58, 53, 31, 66, 83, 6, 93, 20, 10, 68, 57, 72, 65, 60, 87, 75})
+	if res != 63 {
+		t.Errorf("Wrong result case 4; got: %v, expected: 3.\n", res)
 	}
 }
