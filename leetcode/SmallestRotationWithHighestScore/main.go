@@ -7,6 +7,17 @@ func move(A *[]int) {
 	(*A) = append((*A)[1:], (*A)[0])
 }
 
+func calculateScore(A []int) int {
+	score := 0
+	for i, v := range A {
+		if v <= i {
+			score++
+			continue
+		}
+	}
+	return score
+}
+
 func bestRotation(A []int) int {
 	return 1
 }

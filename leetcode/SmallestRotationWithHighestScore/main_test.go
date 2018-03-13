@@ -5,6 +5,14 @@ import (
 	"testing"
 )
 
+func TestCalculateScore(t *testing.T) {
+	score := calculateScore([]int{1, 3, 0, 2, 4})
+
+	if score != 3 {
+		t.Errorf("Wrong score; got: %v, expected: 3.\n", score)
+	}
+}
+
 func TestMove(t *testing.T) {
 	inp := []int{2, 3, 1, 4, 0}
 	move(&inp)
