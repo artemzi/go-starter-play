@@ -23,7 +23,7 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 
 	t, err := template.ParseFiles("tpl/home.html")
 	if err != nil {
-		log.Printf("template parsing errr: %v\n", err)
+		log.Printf("template parsing error: %v\n", err)
 	}
 
 	err = t.Execute(w, HomePageVars)
@@ -32,7 +32,18 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// curl http://localhost:1234?pin=1111
+func askPin(h http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.FormValue("pin") != "1111" {
+			http.Error(w, "wrong pin", http.StatusForbidden)
+			return
+		}
+		h(w, r)
+	}
+}
+
 func main() {
-	http.HandleFunc("/", HomePage)
+	http.HandleFunc("/", askPin(HomePage))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

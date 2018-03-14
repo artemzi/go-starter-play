@@ -14,10 +14,10 @@ func getPort() string {
 	return ":8080" // default
 }
 
-func main() {
-	http.HandleFunc("/", test)
-	http.ListenAndServe(getPort(), nil)
-}
+// func main() {
+// 	http.HandleFunc("/", test)
+// 	http.ListenAndServe(getPort(), nil)
+// }
 
 func test(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "this is a test")
