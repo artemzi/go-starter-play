@@ -1,10 +1,18 @@
 package main
 
 import (
+	"database/sql"
 	"html/template"
 	"log"
 	"net/http"
 	"time"
+
+	_ "github.com/mattn/go-sqlite3"
+)
+
+var (
+	db  *sql.DB
+	err error
 )
 
 // PageVariables helper struct
@@ -43,7 +51,28 @@ func askPin(h http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
+// same as askPin but no hard coded pin value check
+func askDatabaseForPin(h http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var pin string
+		if err := db.QueryRow("SELECT pin FROM pins").Scan(&pin); err != nil {
+			http.Error(w, "database error", http.StatusInternalServerError)
+			return
+		}
+		if r.FormValue("pin") != pin {
+			http.Error(w, "wrong pin", http.StatusForbidden)
+			return
+		}
+		h(w, r)
+	}
+}
+
 func main() {
-	http.HandleFunc("/", askPin(HomePage))
+	if db, err = sql.Open("sqlite3", "./pins.db"); err != nil {
+		panic(err)
+	}
+	defer db.Close()
+
+	http.HandleFunc("/", askDatabaseForPin(HomePage))
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
