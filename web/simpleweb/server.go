@@ -34,6 +34,5 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", HomePage)
-	err := http.ListenAndServe(":8080", nil)
-	log.Fatal(err)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
