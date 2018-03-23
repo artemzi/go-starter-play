@@ -1,0 +1,20 @@
+package charrepl
+
+import "testing"
+
+func TestCharacterReplacement(t *testing.T) {
+	s := "ABAB"
+	k := 2
+	expected := 4
+
+	if r := characterReplacement(s, k); r != expected {
+		t.Errorf("Result for %s is wrong. got: %d, expected: %d\n", s, r, expected)
+	}
+
+	s = "AABABBA"
+	k = 1
+
+	if r := characterReplacement(s, k); r != expected {
+		t.Errorf("Result for %s is wrong. got: %d, expected: %d\n", s, r, expected)
+	}
+}
