@@ -1,8 +1,20 @@
 package charrepl
 
-import "testing"
+import (
+	"runtime"
+	"testing"
+)
 
 func TestCharacterReplacement(t *testing.T) {
+	defer func() {
+		if r := recover(); r != nil {
+			if _, ok := r.(runtime.Error); ok {
+				t.Errorf("Panic: %v\n", r)
+				// debug.PrintStack()
+			}
+		}
+	}()
+
 	s := "ABAB"
 	k := 2
 	expected := 4
