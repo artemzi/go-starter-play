@@ -2,26 +2,38 @@ package coinchange
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
-func TestCoinChangeNormalResult(t *testing.T) {
-	coins := []int{1, 2, 5}
-	amount := 11
-	expected := 3 // (11 = 5 + 5 + 1)
+var tcs = []struct {
+	coins  []int
+	amount int
+	ans    int
+}{
 
-	if r := coinChange(coins, amount); r != expected {
-		t.Errorf("Result for %d with amount %d is wrong. got: %d, expected: %d\n",
-			coins, amount, r, expected)
+	{[]int{1}, 1, 1},
+	{[]int{1}, 0, 0},
+	{[]int{1, 3, 5}, 8, 2},
+	{[]int{1, 2}, 3, 2},
+	{[]int{1, 2, 5}, 11, 3},
+	{[]int{2}, 3, -1},
+}
+
+func Test_coinChange(t *testing.T) {
+	ast := assert.New(t)
+
+	for _, tc := range tcs {
+		ast.Equal(tc.ans, coinChange(tc.coins, tc.amount), "input:%v", tc)
 	}
 }
 
-func TestCoinChangeNilResult(t *testing.T) {
-	coins := []int{2}
-	amount := 3
-	expected := -1
-
-	if r := coinChange(coins, amount); r != expected {
-		t.Errorf("Result for %d with amount %d is wrong. got: %d, expected: %d\n",
-			coins, amount, r, expected)
+func Benchmark_coinChange(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for _, tc := range tcs {
+			coinChange(tc.coins, tc.amount)
+		}
 	}
 }
+
+// go test -bench . -benchmem
