@@ -1,9 +1,6 @@
 package main
 
 import (
-	"bytes"
-	"log"
-	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -15,12 +12,4 @@ func TestInsertionsort1(t *testing.T) {
 	output := insertionsort1(data, len(data))
 
 	assert.Equal(t, expected, output, "Wrong output")
-}
-
-func captureOutput(f func()) string {
-	var buf bytes.Buffer
-	log.SetOutput(&buf)
-	f()
-	log.SetOutput(os.Stderr)
-	return buf.String()
 }
