@@ -15,16 +15,33 @@ import (
 
 // SherlockAndArray solve current task
 func SherlockAndArray(d []int) string {
-	if true {
-		return "YES"
+	s := sum(d)
+	var leftSum int
+
+	for i := 0; i < len(d); i++ {
+		rightSum := 0
+		if i != 0 {
+			leftSum += d[i-1]
+		}
+
+		rightSum = s - leftSum - d[i]
+		if rightSum == leftSum {
+			return "YES"
+		}
 	}
 
 	return "NO"
 }
 
+func sum(x []int) (res int) {
+	for _, val := range x {
+		res += val
+	}
+	return
+}
+
 func main() {
 	var t, n int
-
 	io := bufio.NewReader(os.Stdin)
 	fmt.Fscan(io, &t)
 	data := make([][]int, 0, t)
